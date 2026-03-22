@@ -28,3 +28,54 @@ body {
   color: white;
   text-decoration: none;
 }
+
+
+.instruction {
+    width: fit-content;
+    display: block;
+    margin: 100px auto;
+    font-size: 50px;
+}
+
+form {
+    display: flex;            /* Enables flexbox */
+    justify-content: center;  /* Centers the group on the page */
+    align-items: center;      /* Vertically aligns labels and selects */
+    gap: 40px;                /* Creates even spacing between the pairs */
+    width: 100%;              /* Ensures it spans the full width */
+    padding: 20px 0;
+}
+
+.menu {
+    width: 100%;
+}
+
+/* Optional: adds a little space between label and dropdown */
+label {
+    margin-right: 8px;
+}
+
+select, label {
+    height: 40px;
+    width: 200px;
+    border-radius: 30px;
+    font-size: 20px;
+}
+
+
+.find-videos-button {
+    display: block;
+    margin: 30px auto;
+    height: 60px;
+    width: 200px;
+    font-size: 20px;
+    border-radius: 100px;
+    background-color: gray;
+}
+
+.find-videos-button:hover {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
