@@ -1,4 +1,6 @@
 body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   margin: 0;
   padding: 0; 
 }
@@ -53,13 +55,15 @@ form {
 /* Optional: adds a little space between label and dropdown */
 label {
     margin-right: 8px;
+    width: auto;
 }
 
-select, label {
+select {
     height: 40px;
     width: 200px;
     border-radius: 30px;
     font-size: 20px;
+    padding: 5px 10px;
 }
 
 
@@ -70,12 +74,15 @@ select, label {
     width: 200px;
     font-size: 20px;
     border-radius: 100px;
-    background-color: gray;
+    background-color: #ff5722;
+    color: white;
+    border: none;
 }
 
 .find-videos-button:hover {
+    transition: 0.3s;
     background-color: #333;
     color: white;
     cursor: pointer;
+    transform: scale(1.05);
 }
-
