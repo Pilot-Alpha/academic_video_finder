@@ -75,10 +75,10 @@ subjectSelect.onchange = function() {
 
 async function sendData() {
 
-
   const grade = document.getElementById("classSelect").value
   const subject = document.getElementById("subjectSelect").value
   const chapter = document.getElementById("chapterSelect").value
+  const videoType = document.getElementById("videoType")
 
   const response = await fetch("http://127.0.0.1:5000/get_video", 
     {
@@ -90,13 +90,12 @@ async function sendData() {
         {
           grade: grade,
           subject: subject,
-          chapter: chapter
+          chapter: chapter,
+          videoType: videoType
         }
       )
     }
   )
-  const data = await response.json();
-  console.log(data.message)
 }
 
 document.querySelector(".find-videos-button").addEventListener('click', sendData)

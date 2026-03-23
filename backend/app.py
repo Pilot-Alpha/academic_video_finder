@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+
+
 app = Flask(__name__)
 CORS(app=app)
 
@@ -11,10 +13,15 @@ def get_video():
     grade = data.get('grade')
     subject = data.get('subject')
     chapter = data.get('chapter')
+    video_type = data.get('videoType')
 
-    message = f"You chose chapter {chapter} of subject {subject} of class {grade}"
+    if grade == "9_10":
+        grade = "Class 9 10 SSC"
+    else:
+        grade = "Class 11 12 HSC"
 
-    return jsonify({'message':message})
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

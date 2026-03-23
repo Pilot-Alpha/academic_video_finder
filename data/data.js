@@ -1,6 +1,6 @@
 export const data = {
   "9_10": {
-    "Bangla 1": [
+    "Bangla-1": [
         "শুভা",
         "বই পড়া",
         "আম-আঁটির-ভেঁপু",
@@ -27,7 +27,7 @@ export const data = {
         "কাকতাড়ুয়া",
         "বহিপীর"
         ],
-    "Bangla 2": [
+    "Bangla-2": [
         "ভাষা",
         "বাংলা ভাষা",
         "ধ্বনি ও বর্ণ",
@@ -63,7 +63,7 @@ export const data = {
         "প্রতিবেদন",
         "প্রবন্ধ রচনা"
         ], 
-    "English 1": [
+    "English-1": [
         "Sense of Self",
         "Climate Change",
         "Pastimes",
@@ -81,7 +81,7 @@ export const data = {
         "Media and Modes of E-communication",
         "Graffiti"
     ],
-    "English 2": [
+    "English-2": [
         "Articles",
         "Determiners",
         "Quantifiers",
@@ -124,7 +124,7 @@ export const data = {
         "পরিমিতি",
         "পরিসংখ্যান"
     ], 
-    "Higher Math": [
+    "Higher-Math": [
         "সেট ও ফাংশন",
         "বীজগাণিতিক রাশি",
         "জ্যামিতি",
@@ -220,7 +220,7 @@ export const data = {
   },
   
   "11_12": {
-    "Bangla 1": [
+    "Bangla-1": [
         "বাংলার নব্য লেখকদিগের প্রতি নিবেদন",
         "অপরিচিতা",
         "বিলাসী",
@@ -252,7 +252,7 @@ export const data = {
         "লালসালু (উপন্যাস)",
         "সিরাজউদ্দৌলা (নাটক)"
     ],
-    "Bangla 2": [
+    "Bangla-2": [
         "বাংলা উচ্চারণের নিয়ম",
         "বাংলা বানানের নিয়ম",
         "বাংলা ভাষার ব্যাকরণিক শব্দশ্রেণি",
@@ -271,7 +271,7 @@ export const data = {
         "ক্ষুদে গল্প রচনা",
         "প্রবন্ধ রচনা"
     ],
-    "English 1": [
+    "English-1": [
         "People or Institutions Making History",
         "Dreams",
         "Human Rights",
@@ -287,7 +287,7 @@ export const data = {
         "Food Adulteration",
         "Art and Music"
     ], 
-    "English 2": [
+    "English-2": [
         "Prepositions",
         "Words and Phrases (Special Uses)",
         "Completing Sentences (Clauses and Phrases)",
@@ -304,7 +304,7 @@ export const data = {
         "Paragraph Writing (Comparison/Cause and Effect)",
         "Short Composition"
     ], 
-    "Higher Math 1": [
+    "Higher Math-1": [
         "ম্যাট্রিক্স ও নির্ণায়ক",
         "ভেক্টর",
         "সরলরেখা",
@@ -316,7 +316,7 @@ export const data = {
         "অন্তরীকরণ",
         "যোগজীকরণ"
     ],
-    "Higher Math 2": [
+    "Higher Math-2": [
         "বাস্তব সংখ্যা ও অসমতা",
         "যোগাশ্রয়ী প্রোগ্রাম",
         "জটিল সংখ্যা",
@@ -328,7 +328,7 @@ export const data = {
         "গতিবিদ্যা",
         "বিস্তার পরিমাপ ও সম্ভাবনা"
     ],
-    "Physics 1": [
+    "Physics-1": [
         "ভৌত জগৎ ও পরিমাপ",
         "ভেক্টর",
         "গতিবিদ্যা",
@@ -340,7 +340,7 @@ export const data = {
         "তরঙ্গ",
         "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব"
     ]
-    , "Physics 2": [
+    , "Physics-2": [
         "তাপগতিবিদ্যা",
         "স্থির তড়িৎ",
         "চল তড়িৎ",
@@ -353,21 +353,21 @@ export const data = {
         "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স",
         "জ্যোতির্বিজ্ঞান"
     ], 
-    "Chemistry 1": [
+    "Chemistry-1": [
         "ল্যাবরেটরির নিরাপদ ব্যবহার",
         "গুণগত রসায়ন",
         "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
         "রাসায়নিক পরিবর্তন",
         "কর্মমুখী রসায়ন"
     ],
-    "Chemistry 2": [
+    "Chemistry-2": [
         "পরিবেশ রসায়ন",
         "জৈব রসায়ন",
         "পরিমাণগত রসায়ন",
         "তড়িৎ রসায়ন",
         "অর্থনৈতিক রসায়ন"
     ],
-    "Biology 1": [
+    "Biology-1": [
         "কোষ ও এর গঠন",
         "কোষ বিভাজন",
         "কোষ রসায়ন",
@@ -381,7 +381,7 @@ export const data = {
         "জীবপ্রযুক্তি",
         "জীবের পরিবেশ, বিস্তার ও সংরক্ষণ"
     ],
-    "Biology 2": [
+    "Biology-2": [
         "প্রাণীর পরিচিতি",
         "প্রাণীর শ্রেণিবিভাগ ও বৈশিষ্ট্য",
         "পরিপাক ও শোষণ",
