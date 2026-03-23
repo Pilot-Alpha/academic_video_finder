@@ -6,6 +6,15 @@ API_KEY = "AIzaSyC1-EQwFTWeuWUBsb_-0i4A5dUjgA23Ufc"
 SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
 
+grade_aliases = {
+    "SSC": ["ssc", "class 9", "class 10", "9", "10"],
+    "HSC": ["hsc", "class 11", "class 12", "11", "12"]
+}
+
+def matches_grade(title, grade):
+    title = title.lower()
+    return any(alias in title for alias in grade_aliases.get(grade, []))
+
 def parse_duration(duration):
     match = re.match(r'PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?', duration)
     hours = int(match.group(1) or 0)
@@ -68,30 +77,28 @@ def find_video(grade, subject, chapter, video_type):
         duration = video["duration"]
         url = video["url"]
 
-        if duration < 3600:
+        if duration < 600:
             continue
 
-        title_match_chapter = False
-        title_match_class = False
+        title_match_chapter = any(word.lower() in title.lower()for word in chapter.split())
 
-        for word in chapter.split():
-            if any(word.lower() in title.lower() for word in chapter.split()):
-                title_match_chapter = True
+        if not matches_grade(title, grade):
+            continue
 
-        for word in grade.split():
-            if any(word.lower() in title.lower() for word in grade.split()):
-                title_match_class = True
-
-        if title_match_chapter == False or title_match_class == False:
+        if not title_match_chapter:
             continue
 
 
-        if any(item.lower() == 'acs' for item in title.split()) or any(item.lower() == 'udvash' for item in title.split()) or any(item.lower() == 'unmesh' for item in title.split()) or any(item.lower() == '10ms' for item in title.split()) or any(item.lower() == 'bondi' for item in title.split()) or any(item.lower() == 'pathshala' for item in title.split()) or any(item.lower() == 'acs' for item in description.split()) or any(item.lower() == 'udvash' for item in description.split()) or any(item.lower() == 'unmesh' for item in description.split()) or any(item.lower() == '10ms' for item in description.split()) or any(item.lower() == 'bondi' for item in description.split()) or any(item.lower() == 'pathshala' for item in description.split()):
+        trusted_channels = ["acs", "udvash", "unmesh", "10ms", "bondi", "pathshala"]
+
+        if any(ch in title.lower() for ch in trusted_channels) or \
+        any(ch in description.lower() for ch in trusted_channels):
             score += 20
 
         score += (views/500000) * 10
         score += (comments/1000) * 5
-        score += (likes/views) * 10
+        if views != 0:
+            score += (likes/views) * 10
 
         best_videos.append(
             {
@@ -108,8 +115,9 @@ def find_video(grade, subject, chapter, video_type):
     
     for video in best_videos:
         if video['score'] > top_score:
+            top_score = video['score']
             best_video_url = video['url']
         
     return best_video_url
 
-print(find_video("SSC", "Physics", "Vector", "One Shot"))
+print(find_video("SSC", "Physics", "গতি", "One Shot"))
