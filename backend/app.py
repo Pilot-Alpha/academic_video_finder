@@ -3,7 +3,7 @@ load_dotenv()
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from alg import find_video
+from .alg import find_video
 import os
 
 
