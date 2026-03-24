@@ -86,3 +86,34 @@ select {
     cursor: pointer;
     transform: scale(1.05);
 }
+
+/* Container for the iframe and the badge */
+.iframe-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9; 
+    background: #000; /* Black bars if video doesn't fit perfectly */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Layout for the secondary videos */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+    gap: 30px;
+}
+
+.video-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.featured-section {
+  display: block;
+  width: 560px;
+  margin: auto;
+}

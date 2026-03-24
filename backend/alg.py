@@ -20,7 +20,7 @@ video_type_aliases = {
      "problem-solving" : ["solution", "problem solving", "question", "questions", "cq", "mcq"],
      "revision": ["revision", "repeat", "short", "revisit"],
      "first-time": ["first time", "full explained", "full class", "academic class"],
-     "one-shot" : ["one shot, one-shot"]
+     "one-shot" : ["one shot, one-shot", "marathon"]
 }
 
 def keyword_score(text, chapter):
@@ -155,7 +155,8 @@ def find_video(grade, subject, chapter, video_type):
     
     best_videos_sorted = sorted(best_videos, key=itemgetter('score'), reverse=True)
 
-    print(best_videos_sorted)
-    return best_videos_sorted[0]['url']
+    for item in best_videos_sorted:
+        item['url'] = item['url'].replace("watch?v=", "embed/")
 
-print(find_video("HSC", "Chemistry 1", "রাসায়নিক পরিবর্তন", "problem-solving"))
+    return best_videos_sorted
+
