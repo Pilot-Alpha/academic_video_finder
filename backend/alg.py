@@ -3,10 +3,9 @@ import re
 import math
 from operator import itemgetter
 from datetime import datetime
+import os
+API_KEY = os.getenv("YOUTUBE_API_KEY")
 
-
-
-API_KEY = "AIzaSyC1-EQwFTWeuWUBsb_-0i4A5dUjgA23Ufc"
 
 SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
@@ -123,7 +122,7 @@ def find_video(grade, subject, chapter, video_type):
             score += 20
 
 
-        trusted_channels = ["acs", "udvash", "unmesh", "10ms", "bondi", "pathshala"]
+        trusted_channels = ["acs", "udvash", "unmesh", "10ms", "bondi", "pathshala", "hulkenstein", "lobdhi"]
 
         if any(ch in title.lower() for ch in trusted_channels) or \
         any(ch in description.lower() for ch in trusted_channels):

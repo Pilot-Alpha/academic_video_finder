@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from alg import find_video
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 
 app = Flask(__name__)

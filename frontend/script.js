@@ -75,7 +75,6 @@ async function sendData() {
     }
   )
   const videos = await response.json();
-  const container = document.getElementById('video-container');
 
   
   const featuredContainer = document.getElementById('featured-video-container');
