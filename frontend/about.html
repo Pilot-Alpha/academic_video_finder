@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abouts | AvG</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">
+            <div class="logo">
+                <img class="logo" src="../data/img/Gemini_Generated_Image_4nu0ui4nu0ui4nu0.png" width="150" alt="logo">
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="about.html" class="nav-links-button">About</a></li>
+            <li><a href="contact.html" class="nav-links-button">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="about-body">
+        <h1>Hello!</h1>
+        <p>
+            <strong>
+                About Me:
+            </strong>
+            <br>
+            I’m a Higher Secondary student in Bangladesh with a passion for Computer Science. I noticed that finding 
+            high-quality educational videos on YouTube often required guessing the right keywords, and even then, results 
+            were inconsistent. That inspired me to build an app that ranks videos using a custom scoring algorithm.
+        </p>
+        <p>
+            <strong>
+                About This App:
+            </strong>
+            <br>
+            This app tries to filter through the millions of videos available on youtube using youtube api in order
+            to get the best recommendation following a scoring algorithm I developed. It takes the following things into
+            consideration:
+            <ol>
+                <li>Relevancy</li>
+                <li>Duration</li>
+                <li>Upload Date</li>
+                <li>Engagement</li>
+                <li>Channel Quality</li>
+            </ol>
+            Based on the above metrics, it gives a score on each video on a weighted basis, and then it orders them to find
+            the best from all. However, like all algorithm, it has its flaws. It might not always generate the best video. It
+            might also show different video of a different Class as the top video. However, we tried our best to find the top 
+            videos and really hope that the best video is included in the full list beyond the top reccomendation.
+        </p>
+        <p>
+            <strong>How is this different from searching in youtube?: </strong>
+            <br>
+            Glad you asked. While this searching might feel like a youtube search with buttons instead of typing, but the filtering of videos is 
+            done on a different process than the youtube search. Because, a youtube search is often biased on promotion, engagement, and 
+            hype instead of quality, it often isn't suitable for an "academic" search. Since youtube search algorithm is much more broad,
+            it will often not be focused on academics. And we all know about the torments of ads we need to tolerate when searching 
+            for a simple video, this app removes those ads too!
+            <br>
+            This app primarily aims to reduce the thinking friction and distraction among the students to find the class for their specific
+            videos!
+        </p>
+        <p>
+            <strong>
+                Future Plans:
+            </strong>
+            <br>
+            Currently I have a few things in mind:
+            <ol>
+                <li>Using Cache to store data for repeated searching</li>
+                <li>Improve the algorithm to track type of videos (one-shot, revision, etc.) more accurately</li>
+                <li>Use AI based filtering</li>
+            </ol>
+        </p>
+    </div>
+
+
+
+</body>
+</html>

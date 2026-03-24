@@ -5,9 +5,6 @@ const subjectSelect = document.getElementById("subjectSelect");
 const chapterSelect = document.getElementById("chapterSelect");
 
 
-
-
-
 // 1. When Class changes, update Subjects
 classSelect.onchange = function() {
   subjectSelect.length = 1; // Reset
@@ -57,14 +54,23 @@ async function sendData() {
 
   const loading = document.getElementById("loading");
   const noResults = document.getElementById("no-results");
+  const enterDetails = document.getElementById("no-details")
+  const warning = document.getElementById("warning")
 
-  loading.style.display = "block";
-  noResults.style.display = "none";
 
   const grade = document.getElementById("classSelect").value
   const subject = document.getElementById("subjectSelect").value
   const chapter = document.getElementById("chapterSelect").value
   const videoType = document.getElementById("videoType").value
+
+  if (!grade || !subject || !chapter || !videoType) {
+    enterDetails.style.display = "block"
+    return "Error, No data Selected"
+  }
+
+  enterDetails.style.display = "none";
+  loading.style.display = "block";
+  noResults.style.display = "none";
 
   const response = await fetch("http://127.0.0.1:5000/get_video", 
     {
@@ -85,6 +91,7 @@ async function sendData() {
 
   const videos = await response.json();
   loading.style.display = "none";
+  warning.style.display = "block";
 
   if (!videos || videos.length === 0) {
       noResults.style.display = "block";
