@@ -25,3 +25,14 @@
 .about-body ol {
     font-size: 25px;
 }
+
+@media (max-width: 768px) {
+  .about-body h1 {
+    font-size: 40px;
+  }
+
+  .about-body p,
+  .about-body ol {
+    font-size: 18px;
+  }
+}

@@ -133,3 +133,79 @@ select {
     transition-duration: 0.2s;
     text-decoration: underline;
 }
+
+/* ================= MOBILE RESPONSIVE FIX ================= */
+
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    font-size: 20px;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .logo img {
+    width: 100px;
+  }
+
+  /* Title */
+  .instruction {
+    font-size: 28px;
+    margin: 40px 10px;
+    text-align: center;
+  }
+
+  /* FORM (this is BIG) */
+  form {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  select {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  /* Button */
+  .find-videos-button {
+    width: 90%;
+    max-width: 300px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  /* Featured video */
+  .featured-section {
+    width: 95%;
+  }
+
+  /* Video grid FIX */
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .iframe-wrapper {
+    max-width: 100%;
+  }
+}
+
+
+/* Mobile override */
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+}
