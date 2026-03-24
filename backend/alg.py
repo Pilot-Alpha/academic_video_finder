@@ -4,6 +4,8 @@ import math
 from operator import itemgetter
 from datetime import datetime
 import os
+
+
 API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 
@@ -60,11 +62,17 @@ def find_video(grade, subject, chapter, video_type):
         "key": API_KEY
     }
     
-    res = requests.get(SEARCH_URL, params=params)
+    try:
+        res = requests.get(SEARCH_URL, params=params)
+        res.raise_for_status()
+        search_result = res.json()
+    except Exception as e:
+        print("Search API error:", e)
+        return []
 
     search_result = res.json()
 
-    video_ids = [item['id']['videoId'] for item in search_result['items']]
+    video_ids = [item['id']['videoId'] for item in search_result.get('items', [])]
 
     params = {
         "part": "snippet,statistics,contentDetails",
@@ -72,21 +80,28 @@ def find_video(grade, subject, chapter, video_type):
         "key": API_KEY
     }
 
-    res = requests.get(VIDEOS_URL, params=params)
+    try:
+        res = requests.get(VIDEOS_URL, params=params)
+        res.raise_for_status()
+        videos_info = res.json()
+    except Exception as e:
+        print("Videos API error:", e)
+        return []
     videos_info = res.json()
 
     videos = []
     for video in videos_info['items']:
         info = {
-        "title": video['snippet']['title'],
-        "description": video['snippet']['description'],
-        "publishedAt": video['snippet']['publishedAt'],
-        "channelId": video['snippet']['channelId'],
-        "views": int(video['statistics'].get('viewCount', 0)),
-        "likes": int(video['statistics'].get('likeCount', 0)),
-        "comments": int(video['statistics'].get('commentCount', 0)),
-        "duration": parse_duration(video['contentDetails']['duration']),
-        "url": f"https://www.youtube.com/watch?v={video['id']}"
+            "title": video.get('snippet', {}).get('title', 'No title'),
+            "description": video.get('snippet', {}).get('description', ''),
+            "publishedAt": video.get('snippet', {}).get('publishedAt', '1970-01-01T00:00:00Z'),
+            "channel": video.get('snippet', {}).get('channelTitle', 'Unknown'),
+            "channelId": video.get('snippet', {}).get('channelId', ''),
+            "views": int(video.get('statistics', {}).get('viewCount', 0)),
+            "likes": int(video.get('statistics', {}).get('likeCount', 0)),
+            "comments": int(video.get('statistics', {}).get('commentCount', 0)),
+            "duration": parse_duration(video.get('contentDetails', {}).get('duration', 'PT0S')),
+            "url": f"https://www.youtube.com/watch?v={video.get('id', '')}"
         }
         videos.append(info)
     
@@ -144,12 +159,14 @@ def find_video(grade, subject, chapter, video_type):
         best_videos.append(
             {
                 'score': score,
-                'url': url
+                'url': url,
+                'title': title,
+                'channel': video.get('channel', 'Unknown')
             }
         )
 
     if not best_videos:
-        return None
+        return []
     
     
     best_videos_sorted = sorted(best_videos, key=itemgetter('score'), reverse=True)

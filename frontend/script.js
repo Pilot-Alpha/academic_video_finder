@@ -41,10 +41,12 @@ function createVideoCard(video) {
 
 
     card.innerHTML = `
-        <div class="iframe-wrapper">
-            <iframe src="${video.url}" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <p class="video-score">Match Score: ${Math.round(video.score)}</p>
+    <div class="iframe-wrapper">
+        <iframe src="${video.url}" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <h3>${video.title}</h3>
+    <p>Channel: ${video.channel}</p>
+    <p class="video-score">Match Score: ${Math.round(video.score)}</p>
     `;
     return card;
 }
@@ -52,6 +54,12 @@ function createVideoCard(video) {
 
 
 async function sendData() {
+
+  const loading = document.getElementById("loading");
+  const noResults = document.getElementById("no-results");
+
+  loading.style.display = "block";
+  noResults.style.display = "none";
 
   const grade = document.getElementById("classSelect").value
   const subject = document.getElementById("subjectSelect").value
@@ -74,7 +82,14 @@ async function sendData() {
       )
     }
   )
+
   const videos = await response.json();
+  loading.style.display = "none";
+
+  if (!videos || videos.length === 0) {
+      noResults.style.display = "block";
+      return;
+  }
 
   
   const featuredContainer = document.getElementById('featured-video-container');
