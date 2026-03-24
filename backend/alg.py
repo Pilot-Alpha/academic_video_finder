@@ -1,5 +1,7 @@
 import requests
 import re
+import math
+from operator import itemgetter
 
 API_KEY = "AIzaSyC1-EQwFTWeuWUBsb_-0i4A5dUjgA23Ufc"
 
@@ -11,9 +13,32 @@ grade_aliases = {
     "HSC": ["hsc", "class 11", "class 12", "11", "12"]
 }
 
+video_type_aliases = {
+     "problem-solving" : ["solution", "problem solving", "question", "questions", "cq", "mcq"],
+     "revision": ["revision", "repeat", "short", "revisit"],
+     "first-time": ["first time", "full explained", "full class", "academic class"],
+     "one-shot" : ["one shot, one-shot"]
+}
+
+def keyword_score(text, chapter):
+    score = 0
+    for word in chapter.lower().split():
+        if word in text.lower():
+            score += 1
+    return score
+
+def keyword_score_video_type(text, video_type):
+    score = 0
+    if any(alias in text for alias in video_type_aliases.get(video_type, [])):
+        score += 1
+    return score
+
 def matches_grade(title, grade):
     title = title.lower()
     return any(alias in title for alias in grade_aliases.get(grade, []))
+
+def matches_chapter(title, chapter):
+    return any(word.lower() in title.lower()for word in chapter.split())
 
 def parse_duration(duration):
     match = re.match(r'PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?', duration)
@@ -80,13 +105,13 @@ def find_video(grade, subject, chapter, video_type):
         if duration < 600:
             continue
 
-        title_match_chapter = any(word.lower() in title.lower()for word in chapter.split())
 
-        if not matches_grade(title, grade):
-            continue
+        
+        if matches_grade(title, grade):
+            score += 30
 
-        if not title_match_chapter:
-            continue
+        if matches_chapter(title, chapter) or matches_chapter(description, chapter):
+            score += 30
 
 
         trusted_channels = ["acs", "udvash", "unmesh", "10ms", "bondi", "pathshala"]
@@ -95,10 +120,18 @@ def find_video(grade, subject, chapter, video_type):
         any(ch in description.lower() for ch in trusted_channels):
             score += 20
 
-        score += (views/500000) * 10
-        score += (comments/1000) * 5
+        
+        score += keyword_score(title, chapter) * 25
+        score += keyword_score(description, chapter) * 15
+
+        score += keyword_score_video_type(title, video_type=video_type) * 20
+        score += keyword_score_video_type(description, video_type=video_type) * 10
+
+
+        score += math.log10(views + 1) * 5
+        score += math.log10(comments + 1) * 5
         if views != 0:
-            score += (likes/views) * 10
+            score += (likes/views) * 15
 
         best_videos.append(
             {
@@ -117,7 +150,11 @@ def find_video(grade, subject, chapter, video_type):
         if video['score'] > top_score:
             top_score = video['score']
             best_video_url = video['url']
-        
+
+    
+    best_videos_sorted = sorted(best_videos, key=itemgetter('score'), reverse=True)
+
+    print(best_videos_sorted)
     return best_video_url
 
-print(find_video("SSC", "Physics", "গতি", "One Shot"))
+print(find_video("HSC", "Chemistry 1", "Chemical Change", "problem-solving"))
