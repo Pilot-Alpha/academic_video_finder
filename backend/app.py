@@ -28,10 +28,6 @@ def get_video():
     videos = jsonify(find_video(grade, subject, chapter, video_type))
 
     return videos
-    
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 
 if __name__ == "__main__":
