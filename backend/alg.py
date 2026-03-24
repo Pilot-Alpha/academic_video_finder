@@ -2,6 +2,9 @@ import requests
 import re
 import math
 from operator import itemgetter
+from datetime import datetime
+
+
 
 API_KEY = "AIzaSyC1-EQwFTWeuWUBsb_-0i4A5dUjgA23Ufc"
 
@@ -101,6 +104,12 @@ def find_video(grade, subject, chapter, video_type):
         comments = video["comments"]
         duration = video["duration"]
         url = video["url"]
+        published_date = datetime.strptime(video['publishedAt'], '%Y-%m-%dT%H:%M:%SZ')
+        days_old = (datetime.utcnow() - published_date).days
+        
+        
+        recency_score = 50 / (math.log10(days_old + 10))
+        score += recency_score
 
         if duration < 600:
             continue
@@ -108,30 +117,30 @@ def find_video(grade, subject, chapter, video_type):
 
         
         if matches_grade(title, grade):
-            score += 30
+            score += 20
 
         if matches_chapter(title, chapter) or matches_chapter(description, chapter):
-            score += 30
+            score += 20
 
 
         trusted_channels = ["acs", "udvash", "unmesh", "10ms", "bondi", "pathshala"]
 
         if any(ch in title.lower() for ch in trusted_channels) or \
         any(ch in description.lower() for ch in trusted_channels):
-            score += 20
+            score += 40
 
         
-        score += keyword_score(title, chapter) * 25
-        score += keyword_score(description, chapter) * 15
+        score += keyword_score(title, chapter) * 15
+        score += keyword_score(description, chapter) * 8
 
-        score += keyword_score_video_type(title, video_type=video_type) * 20
+        score += keyword_score_video_type(title, video_type=video_type) * 25
         score += keyword_score_video_type(description, video_type=video_type) * 10
 
 
         score += math.log10(views + 1) * 5
         score += math.log10(comments + 1) * 5
         if views != 0:
-            score += (likes/views) * 15
+            score += (likes/(views+100)) * 15
 
         best_videos.append(
             {
@@ -143,18 +152,10 @@ def find_video(grade, subject, chapter, video_type):
     if not best_videos:
         return None
     
-    top_score = best_videos[0]['score']
-    best_video_url = best_videos[0]['url']
-    
-    for video in best_videos:
-        if video['score'] > top_score:
-            top_score = video['score']
-            best_video_url = video['url']
-
     
     best_videos_sorted = sorted(best_videos, key=itemgetter('score'), reverse=True)
 
     print(best_videos_sorted)
-    return best_video_url
+    return best_videos_sorted[0]['url']
 
-print(find_video("HSC", "Chemistry 1", "Chemical Change", "problem-solving"))
+print(find_video("HSC", "Chemistry 1", "রাসায়নিক পরিবর্তন", "problem-solving"))
