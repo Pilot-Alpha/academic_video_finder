@@ -72,7 +72,7 @@ async function sendData() {
   loading.style.display = "block";
   noResults.style.display = "none";
 
-  const response = await fetch("https://academicvideofinder-production.up.railway.app", 
+  const response = await fetch("/get_video", 
     {
       method: "POST",
       headers: {
