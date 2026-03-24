@@ -1,4 +1,4 @@
-import {data} from "../data/data.js";
+import {data} from './data.js';
 
 const classSelect = document.getElementById("classSelect");
 const subjectSelect = document.getElementById("subjectSelect");
