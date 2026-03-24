@@ -1,19 +1,18 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from alg import find_video
-
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/get_video', methods=['GET', 'POST'])
+@app.route('/get_video', methods=['POST'])
 def get_video():
-    data = request.json
+    data = request.get_json(silent=True) or {}
 
     grade = data.get('grade')
     subject = data.get('subject')

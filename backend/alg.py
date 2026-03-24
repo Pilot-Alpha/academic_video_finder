@@ -21,7 +21,7 @@ video_type_aliases = {
      "problem-solving" : ["solution", "problem solving", "question", "questions", "cq", "mcq"],
      "revision": ["revision", "repeat", "short", "revisit"],
      "first-time": ["first time", "full explained", "full class", "academic class"],
-     "one-shot" : ["one shot, one-shot", "marathon"]
+     "one-shot" : ["one shot", "one-shot", "marathon"]
 }
 
 def keyword_score(text, chapter):
@@ -70,7 +70,6 @@ def find_video(grade, subject, chapter, video_type):
         print("Search API error:", e)
         return []
 
-    search_result = res.json()
 
     video_ids = [item['id']['videoId'] for item in search_result.get('items', [])]
 
@@ -87,7 +86,6 @@ def find_video(grade, subject, chapter, video_type):
     except Exception as e:
         print("Videos API error:", e)
         return []
-    videos_info = res.json()
 
     videos = []
     for video in videos_info['items']:
